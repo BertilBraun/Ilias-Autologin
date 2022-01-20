@@ -1,0 +1,28 @@
+{
+  "manifest_version": 2,
+
+  "name": "Ilias-Autologin",
+  "description": "Automatically login to ILIAS",
+  "version": "1.0",
+  "permissions": [
+    "https://ilias.studium.kit.edu/**",
+    "https://idp.scc.kit.edu/**"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["*://ilias.studium.kit.edu/ilias.php*"],
+      "js": ["js/loginButton.js"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": ["*://ilias.studium.kit.edu/login.php*"],
+      "js": ["js/loginSelect.js"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": ["*://idp.scc.kit.edu/idp/profile*"],
+      "js": ["js/loginLogin.js"],
+      "run_at": "document_end"
+    }
+  ]
+}

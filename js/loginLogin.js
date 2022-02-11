@@ -8,24 +8,28 @@ function getElementByXpath(path) {
   ).singleNodeValue;
 }
 
-const submitButton = getElementByXpath('//*[@id="sbmt"]');
-const nameInput = getElementByXpath('//*[@id="name"]');
-const passwdInput = getElementByXpath('//*[@id="password"]');
+const interval = setInterval(() => {
+  const submitButton = getElementByXpath('//*[@id="sbmt"]');
+  const nameInput = getElementByXpath('//*[@id="name"]');
+  const passwdInput = getElementByXpath('//*[@id="password"]');
 
-if (nameInput && passwdInput && submitButton) {
-  function checkIfIsCorrect() {
-    if (nameInput.value.length == 5) {
-      submitButton.click();
-    } else {
-      setTimeout(checkIfIsCorrect, 1000);
+  if (nameInput && passwdInput && submitButton) {
+    clearInterval(interval);
+
+    function checkIfIsCorrect() {
+      if (nameInput.value.length == 5) {
+        submitButton.click();
+      } else {
+        setTimeout(checkIfIsCorrect, 1000);
+      }
     }
+
+    nameInput.addEventListener("change", function () {
+      checkIfIsCorrect();
+    });
+
+    passwdInput.addEventListener("change", function () {
+      checkIfIsCorrect();
+    });
   }
-
-  nameInput.addEventListener("change", function () {
-    checkIfIsCorrect();
-  });
-
-  passwdInput.addEventListener("change", function () {
-    checkIfIsCorrect();
-  });
-}
+}, 1000);

@@ -8,5 +8,7 @@ function getElementByXpath(path) {
   ).singleNodeValue;
 }
 
-const button = getElementByXpath('//*[@id="button_shib_login"]');
-button?.click();
+setInterval(() => {
+  const button = getElementByXpath('//*[@id="button_shib_login"]');
+  button?.click();
+}, 1000);

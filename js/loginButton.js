@@ -14,9 +14,9 @@ function login() {
   );
 
   if (button?.textContent.includes("Anmelden")) {
-    window.location.href =
-      "https://ilias.studium.kit.edu/login.php?target=root_1&client_id=produktiv&cmd=force_login&lang=de";
+    clearInterval(interval);
+    button.click();
   }
 }
 
-setInterval(login, 1000);
+const interval = setInterval(login, 200);

@@ -8,7 +8,10 @@ function getElementByXpath(path) {
   ).singleNodeValue;
 }
 
-setInterval(() => {
+const interval = setInterval(() => {
   const button = getElementByXpath('//*[@id="button_shib_login"]');
-  button?.click();
-}, 1000);
+  if (button) {
+    clearInterval(interval);
+    button.click();
+  }
+}, 200);

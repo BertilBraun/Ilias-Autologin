@@ -16,20 +16,11 @@ const interval = setInterval(() => {
   if (nameInput && passwdInput && submitButton) {
     clearInterval(interval);
 
-    function checkIfIsCorrect() {
-      if (nameInput.value.length == 5) {
+    const inputInterval = setInterval(() => {
+      if (nameInput.value.length == 5 && passwdInput.value.length >= 4) {
+        clearInterval(inputInterval);
         submitButton.click();
-      } else {
-        setTimeout(checkIfIsCorrect, 1000);
       }
-    }
-
-    nameInput.addEventListener("change", function () {
-      checkIfIsCorrect();
-    });
-
-    passwdInput.addEventListener("change", function () {
-      checkIfIsCorrect();
-    });
+    }, 200);
   }
 }, 1000);

@@ -8,19 +8,28 @@ function getElementByXpath(path) {
   ).singleNodeValue;
 }
 
-const interval = setInterval(() => {
-  const submitButton = getElementByXpath('//*[@id="sbmt"]');
-  const nameInput = getElementByXpath('//*[@id="name"]');
-  const passwdInput = getElementByXpath('//*[@id="password"]');
+const interval = setInterval(
+  (function logic() {
+    const submitButton = getElementByXpath('//*[@id="sbmt"]');
+    const nameInput = getElementByXpath('//*[@id="name"]');
+    const passwdInput = getElementByXpath('//*[@id="password"]');
 
-  if (nameInput && passwdInput && submitButton) {
-    clearInterval(interval);
+    if (nameInput && passwdInput && submitButton) {
+      const inputInterval = setInterval(
+        (function input() {
+          if (nameInput.value.length == 5 && passwdInput.value.length >= 4) {
+            submitButton.click();
+            clearInterval(inputInterval);
+          }
+          return input;
+        })(),
+        200
+      );
 
-    const inputInterval = setInterval(() => {
-      if (nameInput.value.length == 5 && passwdInput.value.length >= 4) {
-        clearInterval(inputInterval);
-        submitButton.click();
-      }
-    }, 200);
-  }
-}, 1000);
+      clearInterval(interval);
+    }
+
+    return logic;
+  })(),
+  1000
+);

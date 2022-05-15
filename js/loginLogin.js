@@ -8,13 +8,15 @@ function getElementByXpath(path) {
   ).singleNodeValue;
 }
 
-const interval = setInterval(
+var interval = setInterval(
   (function logic() {
     const submitButton = getElementByXpath('//*[@id="sbmt"]');
     const nameInput = getElementByXpath('//*[@id="name"]');
     const passwdInput = getElementByXpath('//*[@id="password"]');
 
     if (nameInput && passwdInput && submitButton) {
+      clearInterval(interval);
+
       const inputInterval = setInterval(
         (function input() {
           if (nameInput.value.length == 5 && passwdInput.value.length >= 4) {
@@ -23,10 +25,8 @@ const interval = setInterval(
           }
           return input;
         })(),
-        200
+        1000
       );
-
-      clearInterval(interval);
     }
 
     return logic;

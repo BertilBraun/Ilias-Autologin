@@ -10,9 +10,7 @@ function getElementByXpath(path) {
 
 var interval = setInterval(
   (function logic() {
-    const button = getElementByXpath(
-      "/html/body/div[2]/header/div/ul/li[3]/button"
-    );
+    const button = getElementByXpath("/html/body/div[2]/header/div/ul/li[3]/a");
 
     if (button?.textContent.includes("Anmelden")) {
       clearInterval(interval);

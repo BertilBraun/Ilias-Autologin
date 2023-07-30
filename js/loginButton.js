@@ -1,16 +1,8 @@
-function getElementByXpath(path) {
-  return document.evaluate(
-    path,
-    document,
-    null,
-    XPathResult.FIRST_ORDERED_NODE_TYPE,
-    null
-  ).singleNodeValue;
-}
-
 var interval = setInterval(
   (function logic() {
-    const button = getElementByXpath("/html/body/div[3]/header/div/ul/li[3]/a");
+    const button = document.querySelector(
+      '[aria-label="Anmelden"]'
+    ).parentElement;
 
     console.log("Found Button:", button?.textContent);
     if (button?.textContent.includes("Anmelden")) {

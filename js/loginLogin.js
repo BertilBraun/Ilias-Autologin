@@ -8,28 +8,21 @@ function getElementByXpath(path) {
   ).singleNodeValue;
 }
 
-var interval = setInterval(
-  (function logic() {
-    const submitButton = getElementByXpath('//*[@id="sbmt"]');
-    const nameInput = getElementByXpath('//*[@id="name"]');
-    const passwdInput = getElementByXpath('//*[@id="password"]');
+const submitButton = getElementByXpath('//*[@id="sbmt"]');
+const nameInput = getElementByXpath('//*[@id="name"]');
+const passwdInput = getElementByXpath('//*[@id="password"]');
 
-    if (nameInput && passwdInput && submitButton) {
-      clearInterval(interval);
-
-      const inputInterval = setInterval(
-        (function input() {
-          if (nameInput.value.length == 5 && passwdInput.value.length >= 4) {
-            submitButton.click();
-            clearInterval(inputInterval);
-          }
-          return input;
-        })(),
-        1000
-      );
+if (nameInput && passwdInput && submitButton) {
+  const checkInputsAndSubmit = () => {
+    if (nameInput.value.length == 5 && passwdInput.value.length >= 4) {
+      submitButton.click();
+      // Remove event listeners after submission to prevent memory leaks
+      nameInput.removeEventListener('input', checkInputsAndSubmit);
+      passwdInput.removeEventListener('input', checkInputsAndSubmit);
     }
+  };
 
-    return logic;
-  })(),
-  1000
-);
+  // Add event listeners to both input fields
+  nameInput.addEventListener('input', checkInputsAndSubmit);
+  passwdInput.addEventListener('input', checkInputsAndSubmit);
+}

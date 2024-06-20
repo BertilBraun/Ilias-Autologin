@@ -9,7 +9,7 @@ function getElementByXpath(path) {
 }
 
 const submitButton = getElementByXpath('//*[@id="sbmt"]');
-const nameInput = getElementByXpath('//*[@id="name"]');
+const nameInput = getElementByXpath('//*[@id="username"]');
 const passwdInput = getElementByXpath('//*[@id="password"]');
 
 if (nameInput && passwdInput && submitButton) {
@@ -25,4 +25,7 @@ if (nameInput && passwdInput && submitButton) {
   // Add event listeners to both input fields
   nameInput.addEventListener('input', checkInputsAndSubmit);
   passwdInput.addEventListener('input', checkInputsAndSubmit);
+}
+else {
+  console.error("Could not find the login form elements. Please check the XPath expressions.");
 }
